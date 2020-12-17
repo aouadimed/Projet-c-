@@ -89,7 +89,7 @@ border-radius:20px;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>20</y>
       <width>1251</width>
       <height>621</height>
      </rect>
@@ -189,7 +189,7 @@ border-radius:20px;
               </font>
              </property>
              <property name="text">
-              <string>    Date_don</string>
+              <string>    Date</string>
              </property>
             </widget>
            </item>
@@ -221,7 +221,7 @@ border-radius:20px;
               </font>
              </property>
              <property name="text">
-              <string>Donateur</string>
+              <string>   Initiateur</string>
              </property>
             </widget>
            </item>
@@ -270,7 +270,7 @@ border-radius:20px;
            </font>
           </property>
           <property name="text">
-           <string>Ajouter un don</string>
+           <string>Ajouter un fournisseur</string>
           </property>
          </widget>
         </widget>
@@ -300,7 +300,7 @@ border-radius: 15px;</string>
         <property name="geometry">
          <rect>
           <x>-10</x>
-          <y>20</y>
+          <y>-10</y>
           <width>1271</width>
           <height>541</height>
          </rect>
@@ -314,7 +314,7 @@ border-radius: 15px;</string>
         <widget class="QTableView" name="tableView">
          <property name="geometry">
           <rect>
-           <x>40</x>
+           <x>20</x>
            <y>80</y>
            <width>711</width>
            <height>441</height>
@@ -413,7 +413,7 @@ border-radius: 15px;</string>
               </font>
              </property>
              <property name="text">
-              <string>Donateur</string>
+              <string>Initiateur</string>
              </property>
             </widget>
            </item>
@@ -440,10 +440,40 @@ border-radius: 15px;</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="text">
-             <string>Trier par montant</string>
+           <widget class="QLabel" name="label_11">
+            <property name="font">
+             <font>
+              <family>Century</family>
+              <pointsize>11</pointsize>
+             </font>
             </property>
+            <property name="text">
+             <string>Trier par :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox{
+border:none;
+border-bottom:1px solid #2d3436;
+}
+QComboBox::hover{
+background: rgba(119,181,254,0.5);
+}</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Montant</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -529,7 +559,7 @@ border: none;
 }</string>
           </property>
           <property name="text">
-           <string>Supprimer un don par donateur</string>
+           <string>Supprimer un fournisseur par id</string>
           </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_19">
@@ -546,11 +576,8 @@ border: none;
             <pointsize>7</pointsize>
            </font>
           </property>
-          <property name="text">
-           <string/>
-          </property>
           <property name="placeholderText">
-           <string>Donateur</string>
+           <string>ID_fournisseur</string>
           </property>
          </widget>
          <widget class="QPushButton" name="supprimer">
@@ -594,8 +621,8 @@ border-radius:20px;</string>
         <widget class="QPushButton" name="pushButton_3">
          <property name="geometry">
           <rect>
-           <x>600</x>
-           <y>480</y>
+           <x>270</x>
+           <y>20</y>
            <width>151</width>
            <height>41</height>
           </rect>
@@ -655,8 +682,8 @@ border-radius:20px;</string>
        <widget class="QFrame" name="frame_6">
         <property name="geometry">
          <rect>
-          <x>-10</x>
-          <y>0</y>
+          <x>0</x>
+          <y>50</y>
           <width>1261</width>
           <height>521</height>
          </rect>
@@ -725,7 +752,7 @@ border: none;
            <item row="3" column="0">
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string> Lieu</string>
+              <string> LIEU</string>
              </property>
             </widget>
            </item>
@@ -738,7 +765,7 @@ border: none;
               </font>
              </property>
              <property name="text">
-              <string>Responsable</string>
+              <string>Initiateur</string>
              </property>
             </widget>
            </item>
@@ -767,7 +794,7 @@ border: none;
               </font>
              </property>
              <property name="text">
-              <string>Initiateur</string>
+              <string>Responsable</string>
              </property>
             </widget>
            </item>
@@ -926,7 +953,7 @@ border: none;
 }</string>
           </property>
           <property name="text">
-           <string>Supprimer un événement caritatif par son responsable</string>
+           <string>      Supprimer un equipement par son code</string>
           </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_20">
@@ -944,7 +971,7 @@ border: none;
            </font>
           </property>
           <property name="placeholderText">
-           <string>Responsable</string>
+           <string>ID_fournisseur</string>
           </property>
          </widget>
          <widget class="QPushButton" name="supprimer_equi">
@@ -984,7 +1011,7 @@ border: none;
         <widget class="QWidget" name="horizontalLayoutWidget_3">
          <property name="geometry">
           <rect>
-           <x>420</x>
+           <x>300</x>
            <y>10</y>
            <width>261</width>
            <height>41</height>
@@ -1171,13 +1198,6 @@ border: none;
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QPushButton" name="pushButton_5">
-            <property name="text">
-             <string>Trier alphabétiquement les responsables</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLabel" name="label_20">
             <property name="font">
              <font>
@@ -1186,11 +1206,58 @@ border: none;
              </font>
             </property>
             <property name="text">
-             <string/>
+             <string>Trier par :</string>
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_2">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox{
+border:none;
+border-bottom:1px solid #2d3436;
+}
+QComboBox::hover{
+background: rgba(119,181,254,0.5);
+}</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>alphabétiquement</string>
+             </property>
+            </item>
+           </widget>
+          </item>
          </layout>
+        </widget>
+        <widget class="QPushButton" name="stat_equi">
+         <property name="geometry">
+          <rect>
+           <x>600</x>
+           <y>10</y>
+           <width>171</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>statistique</string>
+         </property>
         </widget>
         <widget class="QGraphicsView" name="graphicsView_2">
          <property name="geometry">
@@ -1209,8 +1276,8 @@ border-radius: 15px;</string>
         <widget class="QPushButton" name="actualiser">
          <property name="geometry">
           <rect>
-           <x>610</x>
-           <y>460</y>
+           <x>40</x>
+           <y>50</y>
            <width>151</width>
            <height>41</height>
           </rect>
@@ -1232,6 +1299,7 @@ border-radius: 15px;</string>
         <zorder>horizontalLayoutWidget_3</zorder>
         <zorder>frame_7</zorder>
         <zorder>horizontalLayoutWidget_4</zorder>
+        <zorder>stat_equi</zorder>
         <zorder>actualiser</zorder>
        </widget>
       </widget>

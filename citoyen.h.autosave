@@ -1,0 +1,20 @@
+#ifndef CITOYEN_H
+#define CITOYEN_H
+#include <QString>
+#include <QDate>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+
+
+
+class citoyen
+{private:
+    Qstring nom,prenom,CIN;
+    QDate date_naissance;
+    
+public:
+    citoyen();
+    citoyen()
+};
+
+#endif // CITOYEN_H
