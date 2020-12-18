@@ -875,7 +875,7 @@ border-radius: 15px;</string>
        <widget class="QFrame" name="frame_5">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>10</x>
           <y>0</y>
           <width>1251</width>
           <height>551</height>
@@ -1173,20 +1173,8 @@ border: none;
           <item>
            <widget class="QPushButton" name="pushButton_5">
             <property name="text">
-             <string>Trier alphabétiquement les responsables</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_20">
-            <property name="font">
-             <font>
-              <family>Century</family>
-              <pointsize>11</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string/>
+             <string>Trier alphabétiquement 
+  par responsable</string>
             </property>
            </widget>
           </item>
