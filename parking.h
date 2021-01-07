@@ -27,7 +27,7 @@ public:
     QSqlQueryModel * trier_2();
     QSqlQueryModel * trier_3();
     QSqlQueryModel * trier_4();
-
+bool modi(QString,QString);
 };
 
 #endif // PARKING_H

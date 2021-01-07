@@ -55,6 +55,15 @@ bool parking::modifier()
 
     return    query.exec();
 }
+bool parking::modi(QString a,QString b)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE parking SET res=:res WHERE id=:id");
+    query.bindValue(":res",a);
+    query.bindValue(":id",b);
+    return query.exec();
+}
+
 QSqlQueryModel * parking::combo_box(){
     QSqlQueryModel * model = new QSqlQueryModel();
     model->setQuery("Select ID from parking");

@@ -39,6 +39,7 @@
 #include "fournisseur.h"
 #include "equipements.h"
 #include "arduino.h"
+#include "notification.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -81,15 +82,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabcha_2->setModel(tmp_parking.afficher());
 
     /*  ************************************************  */
-
-
-
-
-    /*if (ui->stackedWidget->currentChanged(1))
-    {
-
-
-    }   */
 
 
     music1 =new QMediaPlaylist();
@@ -152,18 +144,20 @@ MainWindow::~MainWindow()
 
 bool MainWindow::modi(QString a,QString b)
 {
-    QSqlQuery query;
+    /*QSqlQuery query;
     query.prepare("UPDATE parking SET res=:res WHERE id=:id");
     query.bindValue(":res",a);
     query.bindValue(":id",b);
-    return query.exec();
+    return query.exec();*/
 }
 void MainWindow::arduinowork()
 {
-QString n;
+//**********************med**************************
+    QString n;
 info = a.read_from_arduino();
 QString j=QString::fromStdString(info.toStdString());
 qDebug() << j;
+parking p;
 QString b= QString::number(1);
 QSqlQuery query;
 query.prepare("select nbr from parking WHERE id=:id");
@@ -176,7 +170,7 @@ n =query.value(0).toString();
 if (j<=n)
 {
 updatelcd(j);
-bool test =modi(j,b);
+bool test =p.modi(j,b);
 if (test)
 {
 a.write_to_arduino("2");
@@ -186,11 +180,26 @@ ui->tabcha_2->setModel(tmp_parking.afficher());
 if(j>n)
 {
 a.write_to_arduino("3");
-a.write_to_arduino("1");
+a.write_to_arduino("4");
 }
+//**************************************************************
+data=a.read_from_arduino();
+    QString DataAsString = QString(data);
 
-
-
+    alldata=alldata+QString::fromStdString(data.toStdString());
+    QStringList datasplit = alldata.split(".");
+    int value = (datasplit.last().toInt());
+    qDebug()<<  value;
+    if((value>600)&&(value<1100)){
+        ui->label_arduino->setText("ON");
+    }else if (value<600){
+        ui->label_arduino->setText("OFF");
+    }
+    if((value>600)&&(value<1100)){
+        a.write_to_arduino("1");
+    }else if(value<600){
+        a.write_to_arduino("0");
+    }
 
 
 }
@@ -256,6 +265,9 @@ void MainWindow::on_pushButton_clicked()
     {
         display_listes();
         playaudio();
+
+        notification n;
+        n.ajoutchantier();
         QMessageBox::information(nullptr,("Ajout chantier"),("chantier ajouté"));}
 else
      {QMessageBox::warning(nullptr,("Ajout chantier"),("chantier non ajouté"));}
@@ -394,7 +406,8 @@ void MainWindow::on_pushButton_2_clicked()
 
     {   playaudio();
         display_listes();
-        QMessageBox::information(nullptr,("Ajout intervenant"),("intervenant ajouté"));}
+        notification n;
+        n.ajoutinter();}
 else
      {QMessageBox::warning(nullptr,("Ajout intervenant"),("intervenant non ajouté"));}}
     else QMessageBox::warning(nullptr,("Ajout intervenant"),("pas de données"));
@@ -919,7 +932,8 @@ void MainWindow::on_pushButton_12_clicked()
     {
         display_listes();
         playaudio();
-        QMessageBox::information(nullptr,("Ajout parking"),("parking ajouté"));}
+        notification n;
+        n.ajoutpark();}
 else
      {QMessageBox::warning(nullptr,("Ajout parking"),("parking non ajouté"));}
     }
@@ -1208,9 +1222,8 @@ void MainWindow::on_pushButton_14_clicked()
         Employe e(id,nom,prenom,post,telephone,date);
 
         bool test= e.ajouter();
-        QMessageBox::information(nullptr, QObject::tr("Ajouter un employe"),
-                          QObject::tr("employe ajouté.\n"
-                                      "Click Cancel to exit."), QMessageBox::Cancel);
+        notification n;
+        n.notification_employe();
         refresh();
     }
     else{
@@ -1328,9 +1341,8 @@ void MainWindow::on_pushButton_18_clicked()
     if(verifier_formulaire_ajout_poste()){
          poste p(id,grade,avantage,horaire,salaire);
          bool test= p.ajouter();
-         QMessageBox::information(nullptr, QObject::tr("Ajouterposte"),
-                           QObject::tr("poste ajouté.\n"
-                                       "Click Cancel to exit."), QMessageBox::Cancel);
+         notification n;
+         n.notification_poste();
          refresh();
     }
     else{
@@ -1539,7 +1551,8 @@ void MainWindow::on_pushButton_19_clicked()
        if(test)
 
        {
-           QMessageBox::information(nullptr,("Ajout fournisseur"),("fournisseur ajouté"));
+           notification n;
+           n.notification_fourni();
            ui->tableView->setModel(f.afficher());
        }
    else
@@ -1650,7 +1663,8 @@ void MainWindow::on_pushButton_23_clicked()
        if(test)
 
        {
-           QMessageBox::information(nullptr,("Ajout equipement"),("equipement ajouté"));
+           notification n;
+           n.notification_equi();
            ui->tableView_2->setModel(e1.afficher());
        }
    else
@@ -1880,7 +1894,7 @@ void MainWindow::on_pushButton_envoyer_clicked()
 
         MimeMessage message;
 
-        message.setSender(new EmailAddress("smartmunicipality40@gmail.com", "Mohamed aouadi"));
+        message.setSender(new EmailAddress("smartmunicipality40@gmail.com", "ARIANA municipality"));
         message.addRecipient(new EmailAddress(ui->lineEdit_adresse->text(), "Recipient's name"));
         message.setSubject(ui->lineEdit_objet->text());
 
@@ -1932,4 +1946,59 @@ void MainWindow::on_comboBox_18_activated(const QString &)
 
          }
      }
+}
+
+void MainWindow::on_pushButton_24_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+void MainWindow::on_pushButton_envoyer_3_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_pushButton_envoyer_4_clicked()
+{
+    SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
+
+
+
+
+                smtp.setUser("smartmunicipality40@gmail.com");
+                smtp.setPassword("municipality");
+
+
+
+        MimeMessage message;
+
+        message.setSender(new EmailAddress("smartmunicipality40@gmail.com", "ARIANA municipality"));
+        message.addRecipient(new EmailAddress(ui->lineEdit_adresse_2->text(), "Recipient's name"));
+        message.setSubject(ui->lineEdit_objet_2->text());
+
+
+
+        MimeText text;
+
+        text.setText(ui->textEdit_texte_2->toPlainText());
+
+
+
+        message.addPart(&text);
+
+
+        smtp.connectToHost();
+        smtp.login();
+        if (smtp.sendMail(message)){
+           QMessageBox::information(this, "OK", "email envoyé");
+        }
+        else{
+           QMessageBox::critical(this, "Erreur","email non envoyé");
+        }
+        smtp.quit();
+}
+
+void MainWindow::on_pushButton_25_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
 }

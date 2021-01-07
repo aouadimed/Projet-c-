@@ -206,6 +206,14 @@ void on_tabcha_2_activated(const QModelIndex &index);
 
     void on_comboBox_18_activated(const QString &arg1);
 
+    void on_pushButton_24_clicked();
+
+    void on_pushButton_envoyer_3_clicked();
+
+    void on_pushButton_envoyer_4_clicked();
+
+    void on_pushButton_25_clicked();
+
 private:
     //Ui::MainWindow *ui;
     chantier tmp_chantier;
@@ -219,6 +227,8 @@ private:
     equipements e1;
     Arduino a;
     QByteArray info;
+    QByteArray data;
+    QString alldata;
 };
 #endif // MAINWINDOW_H
 

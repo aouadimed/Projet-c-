@@ -10,10 +10,11 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //authentification show;
     Connection c;
-
     MainWindow w;
+    w.setWindowTitle("Smart Municipality");
+    w.setFixedSize(991,702);
+    w.setWindowIcon(QIcon(":/images/18533.png"));
     bool test=c.createconnect();
     if(test)
     {w.show();
